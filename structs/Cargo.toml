@@ -1,6 +1,6 @@
 [package]
 name = "structs"
 version = "0.1.0"
-authors = ["Aditya Pratap Singh <aditya.pratap.singh@zalando.de>"]
+authors = ["Aditya Pratap Singh <adisinghrajput@gmail.com>"]
 
 [dependencies]
