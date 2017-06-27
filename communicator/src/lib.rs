@@ -1,5 +1,3 @@
-#[cfg(test)]
-mod communicator {
-    fn connect() {
-    }
-}
+mod network;
+
+mod client;
