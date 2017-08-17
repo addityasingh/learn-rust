@@ -1,0 +1,11 @@
+[package]
+name = "ffi"
+version = "0.1.0"
+authors = ["Aditya Pratap Singh <adisinghrajput@gmail.com>"]
+build = "build.rs"
+
+[dependencies]
+libc = "0.1"
+
+[build-dependencies]
+gcc = "0.3"
