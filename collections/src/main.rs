@@ -5,9 +5,12 @@ use std::io;
 
 fn main() {
     let list = vec![1,2,1,3,2,3,3,3,4,5,6,5,7,3,2,8,5,1,9];
-    
+
     mode(list);
-    add_employee_to_org();
+    let map = add_employee_to_org();
+    let dept = "b".to_string();
+    let sorted_list = get_sorted_emplyee_for_dep(map, &dept);
+    println!("Sorted list of employees for dept {} is {:?}", &dept, sorted_list);    
 }
 
 fn mode (list: Vec<i32>) {
@@ -32,7 +35,7 @@ fn mode (list: Vec<i32>) {
     println!("The mode of the list is {} with count {}", largest_count_num, largest_count);
 }
 
-fn add_employee_to_org () {
+fn add_employee_to_org () -> HashMap<String, String> {
     // Initialise a Hashmap as a state bag
     let mut map: HashMap<String, String> = HashMap::new();
     loop {
@@ -41,6 +44,13 @@ fn add_employee_to_org () {
         io::stdin().read_line(&mut input)
             .expect("Failed to get input");
         let sliced_input = &input[..];
+
+        // println!("{:?}", sliced_input);        
+        // Switch to stop adding employees
+        if sliced_input == "done\n" {
+            // println!("{:?}", sliced_input);
+            break;
+        }
 
         let mut name: &str = "";
         let mut department: &str = "";
@@ -67,9 +77,26 @@ fn add_employee_to_org () {
         };
 
         map.entry(name).or_insert(department);
-        println!("The list of employees and their department is {:?}", map);
+        // println!("The list of employees and their department is {:?}", map);
     }
 
+    map
+}
+
+fn get_sorted_emplyee_for_dep (
+    map: HashMap<String, String>, 
+    dep: &String) -> Vec<String> {
+    let mut list: Vec<String> = vec![];
+
+    for (v, k) in map {
+        if k.trim() == dep {
+            list.push(v);
+        }
+    }
+    
+    list.sort();
+    // println!("The list of employees and their department is {:?}", list);
+    list
 }
 
 // fn RLE () {
