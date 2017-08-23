@@ -1,0 +1,14 @@
+{
+  "name": "threading-hint",
+  "version": "0.1.0",
+  "description": "Get number of cpus on the host machines",
+  "main": "lib/index.js",
+  "author": "Aditya Pratap Singh <adisinghrajput@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "neon-cli": "^0.1.19"
+  },
+  "scripts": {
+    "install": "neon build"
+  }
+}
