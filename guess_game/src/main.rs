@@ -4,6 +4,27 @@ use std::io;
 use std::cmp::Ordering;
 use rand::{thread_rng, Rng};
 
+pub struct Guess {
+    value: u32
+}
+
+impl Guess {
+    pub fn new (value: u32) -> Guess {
+
+        if value < 1 || value > 100 {
+            panic!("Expected value between 1 & 100. Got {}", value);
+        }
+
+        Guess {
+            value
+        }
+    }
+
+    pub fn value(&self) -> u32 {
+        self.value
+    }
+}
+
 fn main() {
     println!("Guess the number");
     println!("Please input you guess");
@@ -14,14 +35,14 @@ fn main() {
         let mut guess = String::new();
         io::stdin().read_line(&mut guess)
             .expect("Failed to read line");
-        let guess: u32 = match guess.trim().parse() {
-            Ok(result)  => result,
+        let guess: Guess = match guess.trim().parse() {
+            Ok(result)  => Guess::new(result),
             Err(_)      => continue
         };
 
-        println!("You guessed: {}", guess);
+        println!("You guessed: {:?}", guess.value());
 
-        match guess.cmp(&rnd) {
+        match guess.value().cmp(&rnd) {
             Ordering::Less      => println!("Too small!"),
             Ordering::Equal     => {
                 println!("You win!");
