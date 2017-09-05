@@ -27,3 +27,20 @@ fn plus_one(n: Option<i32>) -> i32 {
         Some(x) => x + 1,
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    #[ignore]
+    fn hundered_plus_one () {
+        assert_eq!(plus_one(Some(100)), 101);
+    }
+
+    #[test]
+    fn null_plus_one () {
+        assert_eq!(plus_one(None), 1);
+    }
+    
+}
