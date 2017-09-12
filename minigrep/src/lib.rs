@@ -24,21 +24,56 @@ pub fn run(config: Config) -> Result<(), Box<Error>> {
     // let file_content = read_file(config.filename);
 
     let mut file_handle = File::open(config.filename)?;
-    let mut content = String::new();
-    file_handle.read_to_string(&mut content)?;
+    let mut contents = String::new();
+    file_handle.read_to_string(&mut contents)?;
 
-    println!("With text:\n{}", content);
+    for line in search(&contents, &config.query) {
+        println!("{}", line);
+    }
 
     Ok(())
 }
 
-// Add this for reference
-fn read_file (filepath: String) -> String {
-    let mut file_handle = File::open(filepath).unwrap();
-    let mut content = String::new();
+pub fn search<'a>(contents: &'a str, query: &'a str) -> Vec<&'a str> {
+    let mut result: Vec<&str> = vec![];
 
-    let _ = file_handle.read_to_string(&mut content)
-        .expect("Cannot read file content");
+    for line in contents.lines() {
+        if line.contains(query) {
+            result.push(&line.trim());
+        }
+    }
+    
+    result
+}
 
-    content
+mod tests {
+    use super::*;
+
+    #[test]
+    fn search_single_result() {
+        let contents = "\
+            Rust:
+            safe, fast, productive.
+            Pick three.";
+        let query = "duct";
+        
+        assert_eq!(
+            vec!["safe, fast, productive."],
+            search(contents, query) 
+        );
+    }
+
+    #[test]
+    fn search_no_result() {
+        let contents = "\
+            Rust:
+            safe, fast, productive.
+            Pick three.";
+        let query = "direct";
+        
+        assert_eq!(
+            vec![] as Vec<&str>,
+            search(contents, query) 
+        );
+    }
 }
