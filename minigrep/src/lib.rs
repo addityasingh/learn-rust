@@ -1,4 +1,6 @@
+extern crate ansi_term;
 
+use ansi_term::Colour::Green;
 use std::error::Error;
 use std::env;
 use std::fs::File;
@@ -29,9 +31,9 @@ pub fn run(config: Config) -> Result<(), Box<Error>> {
     file_handle.read_to_string(&mut contents)?;
 
     let results = if config.case_insensitive {
-        search(&contents, &config.query)
-    } else {
         search_case_insensitive(&contents, &config.query)
+    } else {
+        search(&contents, &config.query)
     };
 
     for line in results {
@@ -41,12 +43,15 @@ pub fn run(config: Config) -> Result<(), Box<Error>> {
     Ok(())
 }
 
-pub fn search<'a>(contents: &'a str, query: &'a str) -> Vec<&'a str> {
-    let mut result: Vec<&str> = vec![];
+pub fn search<'a>(contents: &'a str, query: &'a str) -> Vec<String> {
+    let mut result: Vec<String> = vec![];
+    let mut replacedLine: String;
 
     for line in contents.lines() {
         if line.contains(query) {
-            result.push(&line.trim());
+            let mut replacedVal = &Green.paint(query.clone()).to_string();
+            replacedLine = str::replace(&line, &query, &replacedVal);
+            result.push(replacedLine.trim().to_string());
         }
     }
     
@@ -55,14 +60,17 @@ pub fn search<'a>(contents: &'a str, query: &'a str) -> Vec<&'a str> {
 
 pub fn search_case_insensitive<'a>(
     contents: &'a str, 
-    query: &'a str) -> Vec<&'a str> {
+    query: &'a str) -> Vec<String> {
     let query = query.to_lowercase();
-    let mut result: Vec<&str> = vec![];
+    let mut result: Vec<String> = vec![];
+    let mut replacedLine: String;
 
     //TODO: Use search to acheive this
     for line in contents.lines() {
         if line.to_lowercase().contains(&query) {
-            result.push(&line.trim());
+            let mut replacedVal = &Green.paint(query.clone()).to_string();
+            replacedLine = str::replace(&line, &query, &replacedVal);
+            result.push(replacedLine.trim().to_string());
         }
     }
     
