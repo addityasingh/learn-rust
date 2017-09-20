@@ -1,7 +1,0 @@
-[package]
-name = "minigrep"
-version = "0.1.0"
-authors = ["Aditya Pratap Singh <aditya.pratap.singh@zalando.de>"]
-
-[dependencies]
-ansi_term = "0.9"
