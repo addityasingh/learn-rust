@@ -1,0 +1,11 @@
+Hello
+World
+Testing
+Log
+Based
+Storage
+Systems
+UPDATE users SET email = 'johndoe@example.com' WHERE id = 1
+UPDATE users SET email = 'johndoe@example.com' WHERE id = 1
+UPDATE users SET email = 'johndoe@example.com' WHERE id = 1
+UPDATE users SET email = 'johndoe@example.com' WHERE id = 1

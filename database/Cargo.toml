@@ -1,0 +1,20 @@
+[package]
+name = "database"
+version = "0.1.0"
+authors = ["Aditya Pratap Singh <adisinghrajput@gmail.com>"]
+edition = "2021"
+
+[dependencies]
+serde_json = "1.0"
+actix-web = "4.0"
+sqlparser = "0.50.0"
+serde = "1.0"
+serde_derive = "1.0"
+env_logger = "0.11.5"
+log = "0.4.22"
+
+[dev-dependencies]
+tokio = { version = "1.0", features = ["full"] }
+
+
+
