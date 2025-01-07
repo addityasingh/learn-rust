@@ -8,8 +8,11 @@ enum Coin {
 fn main() {
     println!("Hello, world!");
     let six = plus_one(Some(5));
-
+    println!("The value of 5 + 1 is {} ", six);
     println!("The value of Dime is {} ", find_coin_value(Coin::Dime));
+    println!("The value of Penny is {} ", find_coin_value(Coin::Penny));
+    println!("The value of Nickel is {} ", find_coin_value(Coin::Nickel));
+    println!("The value of quarter is {} ", find_coin_value(Coin::Quarter));
 }
 
 fn find_coin_value(coin: Coin) -> i32 {
