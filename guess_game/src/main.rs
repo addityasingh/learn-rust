@@ -10,8 +10,7 @@ pub struct Guess {
 
 impl Guess {
     pub fn new (value: u32) -> Guess {
-
-        if value < 1 || value > 100 {
+        if !(1..=100).contains(&value) {
             panic!("Expected value between 1 & 100. Got {}", value);
         }
 
