@@ -34,7 +34,13 @@ fn main() {
         active: true
     };
 
-    println!("User {}'s email is {}", user.name, user.email);
+    let status = if user.active {
+        "Enabled"
+    } else {
+        "Disabled"
+    };
+
+    println!("User {}'s email is {} and have have logged in for {} times. Their account is currently {}", user.name, user.email, user.login_count, status);
 
     let rect1 = Rectangle { length: 50, width: 30 };
     let rect2 = Rectangle { length: 40, width: 10 };
